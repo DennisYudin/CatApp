@@ -1,0 +1,7 @@
+<html>
+<body>
+
+    <h3>Cats Service. Version 0.1</h3>
+
+</body>
+</html>
