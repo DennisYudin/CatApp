@@ -80,3 +80,37 @@ wg_forge_backend=# select * from cats limit 2;
 (2 rows)
 ```
  
+
+### Основной функционал
+#### GET
+
+Первое что мы можем сделать дак это получить список всех котов.На запрос:
+```
+curl -X GET http://localhost:8080/cats
+```
+
+Наше приложение возвращает список котов в формате JSON:
+```
+[
+  {"name": "Tihon", "color": "red & white", "tail_length": 15, "whiskers_length": 12},
+  {"name": "Marfa", "color": "black & white", "tail_length": 13, "whiskers_length": 11}
+]
+```
+
+Так же работает сортировка по заданному атрибуту, по возрастанию или убыванию:
+```
+curl -X GET http://localhost:8080/cats?attribute=name&order=asc
+curl -X GET http://localhost:8080/cats?attribute=tail_length&order=desc
+```
+
+Так же клиент имеет возможность запросить подмножество данных, указав offset и limit:
+```
+curl -X GET http://localhost:8080/cats?offset=10&limit=10
+```
+
+Разумеется, клиент может указать и сортировку, и лимит одновременно:
+```
+curl -X GET http://localhost:8080/cats?attribute=color&order=asc&offset=5&limit=2
+```
+ 
+ 
