@@ -28,8 +28,7 @@ https://github.com/wgnet/wg_forge_backend с незначительными из
 
 Но приступим!
 
-1) Для работы приложения нам понадобится:
-  - база данных: wg_forge_db
+1) Для работы приложения нам понадобится база данных с именем wg_forge_db и параметрами:
   - url=jdbc:postgresql://localhost:5432/wg_forge_db
   - user=postgres
   - password=1234
@@ -43,8 +42,7 @@ https://github.com/wgnet/wg_forge_backend с незначительными из
 ```
 docker run --name cat-app -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=wg_forge_db -d postgres:13.3
 ```
-2) Для тестов используется **тестовая база данных**, для нее понадобится следующее:
-- база данных: wg_forge_db_test
+2) Для тестов используется **тестовая база данных**, для нее понадобится база данных с именем wg_forge_db_test и следующими параметарми:
 - url=jdbc:postgresql://localhost:5432/wg_forge_db_test?autosave=conservative
 - user=postgres
 - password=1234
