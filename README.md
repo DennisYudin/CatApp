@@ -40,24 +40,16 @@ https://github.com/wgnet/wg_forge_backend с незначительными из
   
  Конфигурационный файл для боевой БД находится в папке:
  ```
- src/main/resources/postgresql-connection.properties
+ src/main/resources/application.properties
  ```
 
 Если вы умеете пользоваться Docker, то можете воспользоваться коммандой ниже для быстрого запуска:
 ```
 docker run --name cat-app -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=wg_forge_db -d postgres:13.3
 ```
-2) Для тестов используется **тестовая база данных**, для нее понадобится база данных с именем wg_forge_db_test и следующими параметарми:
-- url=jdbc:postgresql://localhost:5432/wg_forge_db_test?autosave=conservative
-- user=postgres
-- password=1234
+2) Для тестов используется **in-memory** база данных H2 и для ее настройки ничего не потребуется.
 
-Конфигурационный файл для тестовой БД находится в папке:
- ```
- src/test/resources/postgresql-connection-test.properties
- ```
- 
- И на этом все.
+Поэтому на этом все.
  
  Теперь при каждом новом запуске приложение автоматически будет:
  1) Создавать нужные таблицы.
