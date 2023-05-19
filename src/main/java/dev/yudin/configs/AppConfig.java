@@ -26,7 +26,7 @@ import javax.sql.DataSource;
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan(basePackages = "dev.yudin")
-@PropertySource("classpath:postgresql-connection.properties")
+@PropertySource("classpath:application.properties")
 public class AppConfig implements WebMvcConfigurer {
     public static final String JDBC_DRIVER = "jdbc.driver";
     public static final String JDBC_URL = "jdbc.url";

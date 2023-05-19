@@ -27,16 +27,16 @@ DROP TABLE IF EXISTS cats_stat CASCADE;
 CREATE TABLE cats_stat (
     tail_length_mean numeric,
     tail_length_median numeric,
-    tail_length_mode integer[],
+    tail_length_mode INTEGER ARRAY,
     whiskers_length_mean numeric,
     whiskers_length_median numeric,
-    whiskers_length_mode integer[]
+    whiskers_length_mode INTEGER ARRAY
 );
 
 DROP TABLE IF EXISTS array_table CASCADE;
 CREATE TABLE array_table (
     name varchar,
 	surname varchar,
-    tail_length_mode integer[]
+    tail_length_mode INTEGER ARRAY
 );
 
