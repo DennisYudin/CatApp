@@ -15,6 +15,14 @@ https://t.me/Dennis_Yudin
 Данное приложение было сделано на основе задания:
 https://github.com/wgnet/wg_forge_backend с незначительными изменениями.
 
+### Структура проекта
+Тут в принципе тоже ничего необычного, а классическая многослойная архитектура с такими уровнями как Controller, Service и DAO как показано ниже на рисунке
+![image](https://github.com/DennisYudin/CatApp/assets/79792162/1302388d-64b6-4900-a72d-5b5df2e8af6f)
+Ну и конечно же, каждый слой находится в своем пакете:
+1) Controller -> src/main/java/dev/yudin/controllers
+2) Service -> src/main/java/dev/yudin/services
+3) DAO -> src/main/java/dev/yudin/dao
+
 ### Технологии которые были использованны в данном проекте
 - Java 13
 - Spring 5
@@ -47,9 +55,12 @@ https://github.com/wgnet/wg_forge_backend с незначительными из
 ```
 docker run --name cat-app -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=wg_forge_db -d postgres:13.3
 ```
-2) Для тестов используется **in-memory** база данных H2 и для ее настройки ничего не потребуется.
+*Примечение: Для тестов используется **in-memory** база данных H2 и для ее настройки ничего не потребуется.*
 
-Поэтому на этом все.
+2) Дальше делаем git clone проекта.
+3) Стартуем через Apache Tomcat версии 9.
+
+И на этом все.
  
  Теперь при каждом новом запуске приложение автоматически будет:
  1) Создавать нужные таблицы.
