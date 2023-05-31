@@ -32,6 +32,7 @@ https://github.com/wgnet/wg_forge_backend с незначительными из
 - Mockito
 - Maven
 - Apache Tomcat 9.0.73
+- Swagger 3.0.0 (Ссылка на API: https://app.swaggerhub.com/apis/DennisYudin/CatApp_API/1.0.0)
 
 ### Настройка проекта
 Все что нам понадобится это PostgreSQL с базой данных, таблицами и данными.
