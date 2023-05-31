@@ -1,29 +1,29 @@
 # Spring REST app
-### Если возникнут вопросы при запуске или настройке 
-Вы можете написать мне в телеграм:
+### If you run into problems during installation or test the application 
+You can text me in Telegram:
 https://t.me/Dennis_Yudin
 
-И я с радостью постараюсь вам помочь:)
+I will try to do my best to help you:)
 
-### Пару слов о проекте
-Данное приложение представляет классичеcкий веб-сервис с реализацией таких HTTP запросов как:
+### A few words about the project
+The current application represents a classic web service with implementation such HTTP requests as 
 - GET
 - POST
 - PUT
 - DELETE
 
-Данное приложение было сделано на основе задания:
-https://github.com/wgnet/wg_forge_backend с незначительными изменениями.
+It was developed based on test task:
+https://github.com/wgnet/wg_forge_backend with small changes.
 
-### Структура проекта
-Тут в принципе тоже ничего необычного, а классическая многослойная архитектура с такими уровнями как Controller, Service и DAO как показано ниже на рисунке
+### Project structure
+Here is nothing unusual just classic multi layer architecture with such layers as Controller, Service and DAO as shown below
 ![image](https://github.com/DennisYudin/CatApp/assets/79792162/1302388d-64b6-4900-a72d-5b5df2e8af6f)
-Ну и конечно же, каждый слой находится в своем пакете:
+And ofcourse every layer has its own package: 
 1) Controller -> src/main/java/dev/yudin/controllers
 2) Service -> src/main/java/dev/yudin/services
 3) DAO -> src/main/java/dev/yudin/dao
 
-### Технологии которые были использованны в данном проекте
+### Tools and technologies
 - Java 13
 - Spring 5
 - Hibernate 5
@@ -32,7 +32,7 @@ https://github.com/wgnet/wg_forge_backend с незначительными из
 - Mockito
 - Maven
 - Apache Tomcat 9.0.73
-- Swagger 3.0.0 (Ссылка на API: https://app.swaggerhub.com/apis/DennisYudin/CatApp_API/1.0.0)
+- Swagger 3.0.0 (url for API: https://app.swaggerhub.com/apis/DennisYudin/CatApp_API/1.0.0)
 
 ### Настройка проекта
 Все что нам понадобится это PostgreSQL с базой данных, таблицами и данными.
