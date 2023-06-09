@@ -34,41 +34,40 @@ And ofcourse every layer has its own package:
 - Apache Tomcat 9.0.73
 - Swagger 3.0.0 (url for API: https://app.swaggerhub.com/apis/DennisYudin/CatApp_API/1.0.0)
 
-### Настройка проекта
-Все что нам понадобится это PostgreSQL с базой данных, таблицами и данными.
+### Setup
+All what we need is a PostgreSQL with database, tables and data.
 
-На самом деле все еще проще ведь по факту для работы данного приложения всего нужна одна база данных, 
-а работу по созданию нужных таблиц и заполнению их исходными данными приложение возьмет уже на себя:)
+Actually it'e even easier than that becourse for work we need only one database with name **wg_forge_db**
+and rest of work will take the application such as create tables and fill in them with data we need:)
 
-Но приступим!
+Let's make a start!
 
-1) Для работы приложения нам понадобится база данных с именем wg_forge_db и параметрами:
-  - url=jdbc:postgresql://localhost:5432/wg_forge_db
-  - user=postgres
-  - password=1234
-  
- Конфигурационный файл для боевой БД находится в папке:
+1) First off we'll need database with name wg_forge_db and params:
+  - url=jdbc:postgresql://localhost:5432/**wg_forge_db**
+  - user=**postgres**
+  - password=**1234**
+ 
+ Configuration file for DB is in folder:
  ```
  src/main/resources/application.properties
  ```
-
-Если вы умеете пользоваться Docker, то можете воспользоваться коммандой ниже для быстрого запуска:
+If you know how to use docker you can use command below:
 ```
 docker run --name cat-app -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=wg_forge_db -d postgres:13.3
 ```
-*Примечение: Для тестов используется **in-memory** база данных H2 и для ее настройки ничего не потребуется.*
+*Note: For tests the application uses in-memory database H2 and you don't need config it at all.
 
-2) Дальше делаем git clone проекта.
-3) Стартуем через Apache Tomcat версии 9.
+2) Make git clone of the project.
+3) Start application by using Apache Tomcat 9.
 
-И на этом все.
+That's it.
  
- Теперь при каждом новом запуске приложение автоматически будет:
- 1) Создавать нужные таблицы.
- 2) Заполнять таблицы нужными данными.
- 3) Удалять все таблице при завершении приложения.
+ Now every time when you start the application is gonna happen:
+ 1) Proper tables will be created.
+ 2) Tables will be fill in with data.
+ 3) Tables will be deleted if application will be stopped.
 
-Как все это выглядит после того как скрипты отработают можно увидеть ниже.
+How it looks like after scripts worked fine.
 ```
 wg_forge_backend=# \d
               List of relations
@@ -88,17 +87,18 @@ wg_forge_backend=# select * from cats limit 2;
 ```
  
 
-### Основной функционал
-#### 1. Получить список всех котов.
+### Functionality
+#### 0. You can check documentation here.
+Swagger 3.0.0 (url for API: https://app.swaggerhub.com/apis/DennisYudin/CatApp_API/1.0.0)
 
-Первое что мы можем сделать дак это получить список всех котов.
+#### 1. Find all
+First off we can get all cats 
 
-На запрос:
+on request:
 ```
 curl -X GET http://localhost:8080/cats
 ```
-
-Наше приложение возвращает список котов в формате JSON:
+Our application will return all cats in JSON format:
 ```
 [
   {"name": "Tihon", "color": "red & white", "tail_length": 15, "whiskers_length": 12},
@@ -106,82 +106,79 @@ curl -X GET http://localhost:8080/cats
 ]
 ```
 
-Так же работает сортировка по заданному атрибуту, по возрастанию или убыванию:
+Also we can sort them by attrubute in ascending or descending order:
 ```
 curl -X GET http://localhost:8080/cats?attribute=name&order=asc
 curl -X GET http://localhost:8080/cats?attribute=tail_length&order=desc
 ```
 
-Так же клиент имеет возможность запросить подмножество данных, указав offset и limit:
+Also we can use subset of data by using offet and limit:
 ```
 curl -X GET http://localhost:8080/cats?offset=10&limit=10
 ```
 
-Разумеется, клиент может указать и сортировку, и лимит одновременно:
+And ofcourse customer can use sort and limit at the same time:
 ```
 curl -X GET http://localhost:8080/cats?attribute=color&order=asc&offset=5&limit=2
 ```
  
-#### 2. Получить конкретного кота по имени.
+#### 2. Get a cat by name
 
-Мы так же можем получить конкретного кота по имени.
-
-На запрос:
+on request:
 ```
 curl -X GET http://localhost:8080/cat/Marfa
 ```
 
-Если кот с данными именем существует приложение вернет нужного кота в формате JSON:
+If a cat with such name exist the application will return a cat in JSON format:
 ```
   {"name": "Marfa", "color": "black & white", "tail_length": 13, "whiskers_length": 11}
 ```
 
-#### 3. Сохранить кота в базу данных.
+#### 3. Save cat
 
-Конечно, наш сервис поддерживает добавление новых котов.
+We can add cats to the list of cats.
 
-Запрос на добавление выглядит так:
+request looks like:
 ```
 curl -X POST http://localhost:8080/cat \
 -d "{\"name\": \"Tihon\", \"color\": \"red & white\", \"tail_length\": 15, \"whiskers_length\": 12}"
 ```
-#### 4. Обновить существующего кота.
+#### 4. Update an exist cat 
 
-Наш сервис может обновлять данные по коту.
+We can update data about cats.
 
-Запрос на обновление выглядит так:
+request looks like this:
 ```
 curl -X PUT http://localhost:8080/cat \
 -d "{\"name\": \"Tihon\", \"color\": \"red & white\", \"tail_length\": 15, \"whiskers_length\": 12}"
 ```
 
-#### 4. Удаление кота.
+#### 4. Delete a cat
 
-Наш сервис может удалять котов по имени.
+We can delete a cat by name.
 
-Запрос на удаление выглядит так:
+request looks like this where "Marfa" is a name of the cat:
 ```
 curl -X DELETE http://localhost:8080/cat/Marfa
 ```
 
-#### 5. Показать статистику по котам.
+#### 5. Show stats
 
-Наше приложение вычисляет некоторые статистические данные о котах такие как:
+we can calculate some stats data about cats such as:
+- average tail length,
+- median length of tails,
+- mode of tail lengths,
+- average mustache length,
+- median of whisker lengths,
+- mode of moustache lengths.
 
-- средняя длина хвоста,
-- медиана длин хвостов,
-- мода длин хвостов,
-- средняя длина усов,
-- медиана длин усов,
-- мода длин усов.
+And save if into cats_stat table.
 
-И сохранить эту информацию в таблицу cats_stat.
-
-И на запрос:
+And on request:
 ```
 curl -X GET http://localhost:8080/cats/stats
 ```
-Должно получиться примерно так:
+We must see:
 ```
 {
     "tail_length_mean": 15.6666666666667,
@@ -198,14 +195,14 @@ curl -X GET http://localhost:8080/cats/stats
 }
 ```
 
-#### 5. Вывести информацию о том сколько котов каждого цвета есть в базe.
+#### 5. Show info about cat's color
 
-Куда же без такой полезной информации поэтому на запрос:
+on request:
 
 ```
 curl -X GET http://localhost:8080/cats/color
 ```
-Мы должны увидеть:
+we must see:
 ```
 [
     {
