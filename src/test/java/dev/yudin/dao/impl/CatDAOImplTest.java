@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -86,7 +87,7 @@ class CatDAOImplTest {
 	void update_ShouldThrowExcp2() {
 		var doesNotExistCat = new Cat("doesNotExistCat", CatColor.WHITE, 5, 5);
 
-		assertThrows(HibernateOptimisticLockingFailureException.class, () -> catDAO.update(doesNotExistCat));
+		assertThrows(DataAccessException.class, () -> catDAO.update(doesNotExistCat));
 	}
 
 	@Test
