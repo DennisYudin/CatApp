@@ -18,10 +18,10 @@ public class StatsCalculator implements Calculator {
 
 	@Override
 	public double calculateMean(List<Integer> numbers) {
-		OptionalDouble mean = numbers.stream()
+		return numbers.stream()
 				.mapToDouble(Integer::doubleValue)
-				.average();
-		return mean.isPresent() ? mean.getAsDouble() : DEFAULT_VALUE_MEAN;
+				.average()
+				.orElse(DEFAULT_VALUE_MEAN);
 	}
 
 	@Override
