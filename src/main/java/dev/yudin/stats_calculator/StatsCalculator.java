@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 @Log4j
 @Component
 public class StatsCalculator implements Calculator {
-	public static final double DEFAULT_VALUE_MEAN = -0.0;
-	public static final int DEFAULT_VALUE_MODE = -1;
+	public static final double DEFAULT_VALUE_MEAN = Double.MIN_VALUE;
+	public static final int DEFAULT_VALUE_MODE = Integer.MIN_VALUE;
 
 	@Override
 	public double calculateMean(List<Integer> numbers) {
@@ -50,13 +50,13 @@ public class StatsCalculator implements Calculator {
 		Map<Integer, Long> frequencies = numbers.stream()
 				.collect(Collectors.groupingBy(Integer::intValue, Collectors.counting()));
 
-		long maxNumber = frequencies.values().stream()
+		long mostFrequentNumber = frequencies.values().stream()
 				.mapToLong(Long::longValue)
 				.max()
 				.orElse(DEFAULT_VALUE_MODE);
 
 		return frequencies.entrySet().stream()
-				.filter(elem -> elem.getValue() == maxNumber)
+				.filter(entry -> entry.getValue() == mostFrequentNumber)
 				.map(Map.Entry::getKey)
 				.mapToInt(Integer::intValue)
 				.toArray();
